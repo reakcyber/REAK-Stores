@@ -1,0 +1,81 @@
+<div class="product-detail" *ngIf="product">
+  <div class="breadcrumb">
+    <a routerLink="/">Home</a>
+    <span>/</span>
+    <span>{{ product.name }}</span>
+  </div>
+
+  <div class="detail-container">
+    <div class="images-section">
+      <div class="main-image">
+        <img [src]="currentImage" [alt]="product.name" />
+      </div>
+      <div class="thumbnail-images">
+        <div
+          class="thumbnail"
+          [class.active]="currentImage === product.image1"
+          (click)="setCurrentImage(product.image1)"
+        >
+          <img [src]="product.image1" [alt]="product.name" />
+        </div>
+        <div
+          class="thumbnail"
+          [class.active]="currentImage === product.image2"
+          (click)="setCurrentImage(product.image2)"
+        >
+          <img [src]="product.image2" [alt]="product.name" />
+        </div>
+        <div
+          class="thumbnail"
+          *ngIf="product.image3"
+          [class.active]="currentImage === product.image3"
+          (click)="setCurrentImage(product.image3)"
+        >
+          <img [src]="product.image3" [alt]="product.name" />
+        </div>
+      </div>
+    </div>
+
+    <div class="info-section">
+      <h1>{{ product.name }}</h1>
+      <p class="price">
+        <span *ngIf="product.priceFrom">From </span>${{ product.price.toFixed(2) }}
+      </p>
+
+      <div class="description">
+        <h3>Product Details</h3>
+        <p>Premium streetwear piece from our exclusive collection. Crafted with high-quality materials for ultimate comfort and style. Limited availability.</p>
+
+        <ul class="features">
+          <li>Premium quality fabric</li>
+          <li>Unique design</li>
+          <li>Limited edition</li>
+          <li>Comfortable fit</li>
+        </ul>
+      </div>
+
+      <div class="actions">
+        <button class="add-to-cart-btn" (click)="addToCart()">
+          Add to Cart
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="related-section" *ngIf="relatedProducts.length > 0">
+    <h2>You May Also Like</h2>
+    <div class="related-grid">
+      <a
+        *ngFor="let related of relatedProducts"
+        [routerLink]="['/product', related.id]"
+        class="related-item"
+      >
+        <div class="related-image">
+          <img [src]="related.image1" [alt]="related.name" />
+        </div>
+        <h4>{{ related.name }}</h4>
+        <p>${{ related.price.toFixed(2) }}</p>
+      </a>
+    </div>
+  </div>
+</div>

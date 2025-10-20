@@ -1,0 +1,48 @@
+<div class="product-grid">
+  <app-product-card
+    *ngFor="let product of filteredProducts"
+    [product]="product"
+    (quickView)="openQuickView($event)"
+  ></app-product-card>
+</div>
+
+<div *ngIf="filteredProducts.length === 0" class="no-results">
+  <p>No products found matching "{{ searchQuery }}"</p>
+</div>
+
+<!-- Quick View Modal -->
+<div class="modal-overlay" *ngIf="showQuickView" (click)="closeQuickView()">
+  <div class="modal-content" (click)="$event.stopPropagation()" *ngIf="selectedProduct">
+    <button class="close-btn" (click)="closeQuickView()">×</button>
+    <div class="modal-body">
+      <div class="modal-image">
+        <img [src]="modalCurrentImage || selectedProduct.image1" [alt]="selectedProduct.name" />
+      </div>
+      <div class="modal-thumbs">
+        <div class="thumb" (click)="modalCurrentImage = selectedProduct.image1">
+          <img [src]="selectedProduct.image1" [alt]="selectedProduct.name" />
+        </div>
+        <div class="thumb" (click)="modalCurrentImage = selectedProduct.image2">
+          <img [src]="selectedProduct.image2" [alt]="selectedProduct.name" />
+        </div>
+        <div class="thumb" *ngIf="selectedProduct.image3" (click)="modalCurrentImage = selectedProduct.image3">
+          <img [src]="selectedProduct.image3" [alt]="selectedProduct.name" />
+        </div>
+      </div>
+      <div class="modal-info">
+        <h2>{{ selectedProduct.name }}</h2>
+        <p class="modal-price">
+          <span *ngIf="selectedProduct.priceFrom">From </span>${{ selectedProduct.price.toFixed(2) }}
+        </p>
+        <p class="modal-description">
+          Premium streetwear piece from our exclusive collection. Limited availability.
+        </p>
+        <div class="modal-actions">
+          <button class="view-details-btn" [routerLink]="['/product', selectedProduct.id]" (click)="closeQuickView()">
+            View Details
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

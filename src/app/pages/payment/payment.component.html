@@ -1,0 +1,40 @@
+<div class="payment-page">
+  <h1>Checkout</h1>
+
+  <div class="checkout-container">
+    <div class="checkout-form">
+      <label>Full Name</label>
+      <input [(ngModel)]="fullName" placeholder="Full name" />
+
+      <label>Card Number</label>
+      <input [(ngModel)]="cardNumber" placeholder="1234 5678 9012 3456" />
+
+      <div class="row">
+        <div>
+          <label>Expiry</label>
+          <input [(ngModel)]="expiry" placeholder="MM/YY" />
+        </div>
+        <div>
+          <label>CVV</label>
+          <input [(ngModel)]="cvv" placeholder="123" />
+        </div>
+      </div>
+
+      <button class="pay-btn" (click)="submitPayment()">Pay Now</button>
+    </div>
+
+    <div class="order-summary">
+      <h2>Order Summary</h2>
+      <div *ngFor="let item of cartService.cartItems$ | async">
+        <div class="summary-item">
+          <span>{{ item.product.name }} x{{ item.quantity }}</span>
+          <span>${{ (item.product.price * item.quantity).toFixed(2) }}</span>
+        </div>
+      </div>
+      <div class="summary-total">
+        <strong>Total:</strong>
+        <strong>${{ cartService.getTotal().toFixed(2) }}</strong>
+      </div>
+    </div>
+  </div>
+</div>

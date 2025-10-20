@@ -1,0 +1,49 @@
+<header class="header">
+  <div class="header-left">
+    <button class="mobile-menu-btn" (click)="toggleMobileMenu()" [class.active]="showMobileMenu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <div class="time">{{ currentTime }}</div>
+  </div>
+
+  <div class="logo">
+    <a routerLink="/">
+      <img src="/logo1.png" alt="kdmv" />
+    </a>
+  </div>
+
+  <div class="header-right">
+    <button class="search-btn" (click)="toggleSearch()" [class.active]="showSearch">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8"></circle>
+        <path d="m21 21-4.35-4.35"></path>
+      </svg>
+    </button>
+    <div class="cart" routerLink="/cart">CART ({{ cartCount }})</div>
+    <a class="auth-link" routerLink="/login">Login</a>
+    <!-- <a class="auth-link" routerLink="/register">Register</a> -->
+  </div>
+
+  <!-- Search Bar -->
+  <div class="search-container" [class.show]="showSearch">
+    <input
+      type="text"
+      [(ngModel)]="searchQuery"
+      (input)="onSearch()"
+      placeholder="Search products..."
+      class="search-input"
+    />
+  </div>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" [class.show]="showMobileMenu">
+    <nav>
+      <a routerLink="/" (click)="toggleMobileMenu()">Home</a>
+      <a routerLink="/cart" (click)="toggleMobileMenu()">Cart ({{ cartCount }})</a>
+      <a routerLink="/login" (click)="toggleMobileMenu()">Login</a>
+      <!-- <a routerLink="/register" (click)="toggleMobileMenu()">Register</a> -->
+    </nav>
+  </div>
+</header>

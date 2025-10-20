@@ -1,0 +1,11 @@
+.payment-page { padding: 20px; }
+.checkout-container { display: flex; gap: 24px; }
+.checkout-form { flex: 1; max-width: 480px; }
+.checkout-form label { display:block; margin-top:12px; }
+.checkout-form input { width:100%; padding:8px; margin-top:6px; }
+.row { display:flex; gap:12px; }
+.row > div { flex:1; }
+.order-summary { width:320px; border-left:1px solid #eee; padding-left:16px; }
+.summary-item { display:flex; justify-content:space-between; padding:6px 0; }
+.summary-total { margin-top:12px; display:flex; justify-content:space-between; }
+.pay-btn { margin-top:12px; padding:10px 16px; }

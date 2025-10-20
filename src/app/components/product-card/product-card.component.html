@@ -1,0 +1,25 @@
+<div class="product-card" (mouseenter)="isHovered = true" (mouseleave)="isHovered = false">
+  <a [routerLink]="['/product', product.id]" class="product-link">
+    <div class="image-container">
+      <img
+        [src]="isHovered ? product.image2 : product.image1 "
+        [alt]="product.name"
+        class="product-image"
+      />
+      <div class="overlay" [class.show]="isHovered">
+        <button class="quick-view-btn" (click)="onQuickView($event)">
+          Quick View
+        </button>
+      </div>
+    </div>
+    <div class="product-info">
+      <h3 class="product-name">{{ product.name }}</h3>
+      <p class="product-price">
+        <span *ngIf="product.priceFrom">From </span>${{ product.price.toFixed(2) }}
+      </p>
+    </div>
+  </a>
+  <button class="add-to-cart-btn" (click)="addToCart($event)">
+    Add to Cart
+  </button>
+</div>
